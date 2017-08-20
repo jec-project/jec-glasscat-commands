@@ -103,7 +103,7 @@ export class BuildArchetype extends AbstractScriptCommand
     parameters.push(
       paramBuilder.build(
         "gpm",
-        "The reference to the 'Glasscat Project Model' to use for creating the archetype.",
+        "The reference to the 'GlassCat Project Model' to use for creating the archetype.",
         "string",
         true
       )
