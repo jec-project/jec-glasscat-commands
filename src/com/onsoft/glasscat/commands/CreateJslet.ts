@@ -26,9 +26,8 @@ import {JecStringsEnum, UrlStringsEnum} from "jec-commons";
 /**
  * The command that allows to create a jslet file for a GlassCat EJP.
  * 
- * ```bash
- $ glasscat create-jslet --projectPath=myProject --name=MyClassName --path=myDirectory --compile
- ```
+ * [[include:CreateJslet.md]]
+ * 
  */
 export class CreateJslet extends AbstractScriptCommand
                          implements ScriptCommand {

@@ -25,9 +25,8 @@ import {Logger} from "jec-commons";
 /**
  * The command that allows to build GlassCat projects form Wildcat archetypes.
  * 
- * ```bash
-$ glasscat build-archetype --gpm=basic --projectName=myProject --directory=myDirectory --contextRoot=myContextRoot
-```
+ * [[include:BuildArchetype.md]]
+ * 
  */
 export class BuildArchetype extends AbstractScriptCommand
                             implements ScriptCommand {

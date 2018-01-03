@@ -26,9 +26,8 @@ import {JecStringsEnum, UrlStringsEnum} from "jec-commons";
 /**
  * The command that allows to create a bootstrap file for a GlassCat EJP.
  * 
- * ```bash
-$ glasscat create-bootstrap-file --projectPath=myProject --name=MyClassName --path=myDirectory --compile
-```
+ * [[include:CreateBootstrapFile.md]]
+ * 
 */
 export class CreateBootstrapFile extends AbstractScriptCommand
                                  implements ScriptCommand {

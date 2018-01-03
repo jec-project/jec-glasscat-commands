@@ -1,12 +1,12 @@
 /*!
- * JEC GlassCat CLI Gruntfile.js
+ * JEC GlassCat Commands Gruntfile.js
  * Copyright(c) 2017 Pascal ECHEMANN
  * Apache 2.0 Licensed
  * This is a part of the JEC projects: <https://github.com/pechemann/JEC>
  */
 
 /*
- * Provides tasks for building and testing the jec-glasscat-cli project.
+ * Provides tasks for building and testing the jec-glasscat-commands project.
  */
 module.exports = function(grunt) {
 
@@ -96,8 +96,9 @@ module.exports = function(grunt) {
         target: "ES6",
         out: "docs/api-reference",
         readme: "README.md",
-        name: "JEC GlassCat CLI Project",
-        exclude: "**/*Test*.ts"
+        name: "JEC GlassCat Commands Project",
+        exclude: "**/*Test*.ts",
+        includes: "utils/doc-includes"
       }
     }
   });
@@ -124,11 +125,11 @@ module.exports = function(grunt) {
    * JEC Wildcat Tasks:
    */
 
-  //--> Task: builds the "jec-glasscat-cli" project:
+  //--> Task: builds the "jec-glasscat-commands" project:
   grunt.registerTask("build", ["ts:build", "copy:main",
                                "copy:initTypes", "copy:buildTypesFile",
                                "clean:build"]);
 
-  //--> Task: builds the "jec-glasscat-cli" API documentation:
+  //--> Task: builds the "jec-glasscat-commands" API documentation:
   grunt.registerTask("doc", ["typedoc"]);
 }

@@ -27,9 +27,8 @@ import {TemplatePaths, TemplatePathsSolver} from "jec-glasscat-core";
  * The command that allows to create a <code>BasicSecurityRole</code> concrete
  * implementation for a GlassCat EJP.
  * 
- * ```bash
-$ glasscat create-role --projectPath=myProject --name=MyClassName --role=ROLE --path=myDirectory
-```
+ * [[include:CreateRole.md]]
+ * 
  */
 export class CreateRole extends AbstractScriptCommand implements ScriptCommand {
 

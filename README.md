@@ -1,6 +1,6 @@
 # JEC GlassCat Commands Project
 
-The GlassCat Commands Project contains the default commands used by the GlassCat CLI to manage utilities.
+The GlassCat Commands Project contains the default commands used by the GlassCat Command Line Interface to manage utilities.
 
 [![][jec-logo]][jec-url]
 
@@ -43,7 +43,7 @@ The documentation generator is [TypeDoc](http://typedoc.org/)
 
 ## Update Release Notes
 
-**Current stable release:** [1.0.3](CHANGELOG.md#jec-glasscat-commands-1.0.3)
+**Current stable release:** [1.0.4](CHANGELOG.md#jec-glasscat-commands-1.0.4)
  
 For a complete listing of release notes for all JEC GlassCat Commands update releases, see the [CHANGELOG](CHANGELOG.md) file. 
 
