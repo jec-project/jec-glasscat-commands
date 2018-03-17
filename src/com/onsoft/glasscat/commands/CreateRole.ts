@@ -59,7 +59,7 @@ export class CreateRole extends AbstractScriptCommand implements ScriptCommand {
    */
   private createTemplate(className:string, role:string,
                                            glasscatPath:string):string {
-    let template:string =
+    const template:string =
 `import {BasicSecurityRole} from "jec-glasscat-core";
 
 /**
@@ -86,10 +86,10 @@ export class ${className} extends BasicSecurityRole {
    * @inheritDoc
    */
   public execute(argv:any, callback:(err:any)=>void):void {
-    let project:string = argv.projectPath;
-    let name:string = argv.name;
-    let role:string = argv.role;
-    let path:string = argv.path;
+    const project:string = argv.projectPath;
+    const name:string = argv.name;
+    const role:string = argv.role;
+    const path:string = argv.path;
     let solver:TemplatePathsSolver = null;
     let templatePaths:TemplatePaths = null;
     if(!project || project === UrlStringsEnum.EMPTY_STRING) {
@@ -120,10 +120,10 @@ export class ${className} extends BasicSecurityRole {
    * @inheritDoc
    */
   public getHelp(argv:any):any {
-    let commBuilder:CommandDescriptorBuilder = new CommandDescriptorBuilder();
-    let paramBuilder:ParameterDescriptorBuilder =
+    const commBuilder:CommandDescriptorBuilder = new CommandDescriptorBuilder();
+    const paramBuilder:ParameterDescriptorBuilder =
                                                new ParameterDescriptorBuilder();
-    let parameters:ParameterDescriptor[] = new Array<ParameterDescriptor>();
+    const parameters:ParameterDescriptor[] = new Array<ParameterDescriptor>();
     parameters.push(
       paramBuilder.build(
         "projectPath",
@@ -155,7 +155,7 @@ export class ${className} extends BasicSecurityRole {
         "boolean"
       )
     );
-    let descriptor:CommandDescriptor = commBuilder.build(
+    const descriptor:CommandDescriptor = commBuilder.build(
       "$glasscat create-role",
       "Creates a new security role class for a GlassCat EJP.",
 

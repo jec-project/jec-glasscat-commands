@@ -51,8 +51,8 @@ export class BuildArchetype extends AbstractScriptCommand
    */
   private buildProcessor():Wildcat {
     WildcatLoggerProxy.getInstance().setLogger(this.__logger);
-    let wildcatBuilder:WildcatBuilder = new WildcatBuilder();
-    let wildcat:Wildcat = wildcatBuilder.build();
+    const wildcatBuilder:WildcatBuilder = new WildcatBuilder();
+    const wildcat:Wildcat = wildcatBuilder.build();
     return wildcat;
   }
 
@@ -63,7 +63,7 @@ export class BuildArchetype extends AbstractScriptCommand
    * @return {WildcatRequest} a new <code>WildcatRequest</code> instance.
    */
   private buildRequest(argv:any):WildcatRequest {
-    let requestBuilder:WildcatRequestBuilder = new WildcatRequestBuilder();
+    const requestBuilder:WildcatRequestBuilder = new WildcatRequestBuilder();
     requestBuilder.gpm(argv.gpm);
     requestBuilder.projectName(argv.projectName);
     requestBuilder.contextRoot(argv.contextRoot);
@@ -95,10 +95,10 @@ export class BuildArchetype extends AbstractScriptCommand
    * @inheritDoc
    */
   public getHelp(argv:any):CommandDescriptor {
-    let commBuilder:CommandDescriptorBuilder = new CommandDescriptorBuilder();
-    let paramBuilder:ParameterDescriptorBuilder =
+    const commBuilder:CommandDescriptorBuilder = new CommandDescriptorBuilder();
+    const paramBuilder:ParameterDescriptorBuilder =
                                                new ParameterDescriptorBuilder();
-    let parameters:ParameterDescriptor[] = new Array<ParameterDescriptor>();
+    const parameters:ParameterDescriptor[] = new Array<ParameterDescriptor>();
     parameters.push(
       paramBuilder.build(
         "gpm",
@@ -131,7 +131,7 @@ export class BuildArchetype extends AbstractScriptCommand
         true
       )
     );
-    let descriptor:CommandDescriptor = commBuilder.build(
+    const descriptor:CommandDescriptor = commBuilder.build(
       "$glasscat build-archetype",
       "Builds and deploies an EJP archetype from the 'public/wildcat/' repository, to the workspace."
     );

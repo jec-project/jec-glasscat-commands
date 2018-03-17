@@ -10,7 +10,7 @@ class CreateRole extends jec_glasscat_cli_1.AbstractScriptCommand {
         super();
     }
     createTemplate(className, role, glasscatPath) {
-        let template = `import {BasicSecurityRole} from "jec-glasscat-core";
+        const template = `import {BasicSecurityRole} from "jec-glasscat-core";
 
 /**
  * ${className} class.
@@ -28,10 +28,10 @@ export class ${className} extends BasicSecurityRole {
         return template;
     }
     execute(argv, callback) {
-        let project = argv.projectPath;
-        let name = argv.name;
-        let role = argv.role;
-        let path = argv.path;
+        const project = argv.projectPath;
+        const name = argv.name;
+        const role = argv.role;
+        const path = argv.path;
         let solver = null;
         let templatePaths = null;
         if (!project || project === jec_commons_1.UrlStringsEnum.EMPTY_STRING) {
@@ -55,14 +55,14 @@ export class ${className} extends BasicSecurityRole {
         });
     }
     getHelp(argv) {
-        let commBuilder = new jec_glasscat_cli_1.CommandDescriptorBuilder();
-        let paramBuilder = new jec_glasscat_cli_1.ParameterDescriptorBuilder();
-        let parameters = new Array();
+        const commBuilder = new jec_glasscat_cli_1.CommandDescriptorBuilder();
+        const paramBuilder = new jec_glasscat_cli_1.ParameterDescriptorBuilder();
+        const parameters = new Array();
         parameters.push(paramBuilder.build("projectPath", "Represents the project directory for which to create the security role.", "string", true));
         parameters.push(paramBuilder.build("name", "The name of the security role to create.", "string", true));
         parameters.push(paramBuilder.build("path", "Represents the directory name, whithin the project, where to create the security role.", "string", true));
         parameters.push(paramBuilder.build("compile", "Indicate whether to compile the generated TypeScript file (true), or not (false).", "boolean"));
-        let descriptor = commBuilder.build("$glasscat create-role", "Creates a new security role class for a GlassCat EJP.", parameters);
+        const descriptor = commBuilder.build("$glasscat create-role", "Creates a new security role class for a GlassCat EJP.", parameters);
         return descriptor;
     }
 }

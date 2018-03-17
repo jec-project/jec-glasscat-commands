@@ -55,7 +55,7 @@ export class CreateBootstrapFile extends AbstractScriptCommand
    * @return {string} the template for the bootstrap file to create.
    */
   private createTemplate(className:string, glasscatPath:string):string {
-    let template:string =
+    const template:string =
 `import {BootstrapScript, JecContainer} from "jec-commons";
 
 /**
@@ -85,7 +85,7 @@ export class ${className} implements BootstrapScript {
    * @return {string} the template for the compiled bootstrap file to create.
    */
   private createCompiledTemplate(className:string, glasscatPath:string):string {
-    let template:string =
+    const template:string =
 `"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class ${className} {
@@ -105,10 +105,11 @@ exports.${className} = ${className};`;
    * @inheritDoc
    */
   public execute(argv:any, callback:(err:any)=>void):void {
-    let project:string = argv.projectPath;
-    let name:string = argv.name;
-    let path:string = argv.path;
-    let compile:boolean = (argv.compile !== null || argv.compile !== undefined);
+    const project:string = argv.projectPath;
+    const name:string = argv.name;
+    const path:string = argv.path;
+    const compile:boolean =
+                          (argv.compile !== null || argv.compile !== undefined);
     let solver:TemplatePathsSolver = null;
     let templatePaths:TemplatePaths = null;
     if(!project || project === UrlStringsEnum.EMPTY_STRING) {
@@ -149,10 +150,10 @@ exports.${className} = ${className};`;
    * @inheritDoc
    */
   public getHelp(argv:any):any {
-    let commBuilder:CommandDescriptorBuilder = new CommandDescriptorBuilder();
-    let paramBuilder:ParameterDescriptorBuilder =
+    const commBuilder:CommandDescriptorBuilder = new CommandDescriptorBuilder();
+    const paramBuilder:ParameterDescriptorBuilder =
                                                new ParameterDescriptorBuilder();
-    let parameters:ParameterDescriptor[] = new Array<ParameterDescriptor>();
+    const parameters:ParameterDescriptor[] = new Array<ParameterDescriptor>();
     parameters.push(
       paramBuilder.build(
         "projectPath",
@@ -184,7 +185,7 @@ exports.${className} = ${className};`;
         "boolean"
       )
     );
-    let descriptor:CommandDescriptor = commBuilder.build(
+    const descriptor:CommandDescriptor = commBuilder.build(
       "$glasscat create-bootstrap-file",
       "Creates a new bootstrap file for a GlassCat EJP.",
       parameters

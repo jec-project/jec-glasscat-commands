@@ -10,7 +10,7 @@ class CreateBootstrapFile extends jec_glasscat_cli_1.AbstractScriptCommand {
         super();
     }
     createTemplate(className, glasscatPath) {
-        let template = `import {BootstrapScript, JecContainer} from "jec-commons";
+        const template = `import {BootstrapScript, JecContainer} from "jec-commons";
 
 /**
  * ${className} class.
@@ -31,7 +31,7 @@ export class ${className} implements BootstrapScript {
         return template;
     }
     createCompiledTemplate(className, glasscatPath) {
-        let template = `"use strict";
+        const template = `"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class ${className} {
     run(container) {
@@ -42,10 +42,10 @@ exports.${className} = ${className};`;
         return template;
     }
     execute(argv, callback) {
-        let project = argv.projectPath;
-        let name = argv.name;
-        let path = argv.path;
-        let compile = (argv.compile !== null || argv.compile !== undefined);
+        const project = argv.projectPath;
+        const name = argv.name;
+        const path = argv.path;
+        const compile = (argv.compile !== null || argv.compile !== undefined);
         let solver = null;
         let templatePaths = null;
         if (!project || project === jec_commons_1.UrlStringsEnum.EMPTY_STRING) {
@@ -73,14 +73,14 @@ exports.${className} = ${className};`;
         });
     }
     getHelp(argv) {
-        let commBuilder = new jec_glasscat_cli_1.CommandDescriptorBuilder();
-        let paramBuilder = new jec_glasscat_cli_1.ParameterDescriptorBuilder();
-        let parameters = new Array();
+        const commBuilder = new jec_glasscat_cli_1.CommandDescriptorBuilder();
+        const paramBuilder = new jec_glasscat_cli_1.ParameterDescriptorBuilder();
+        const parameters = new Array();
         parameters.push(paramBuilder.build("projectPath", "Represents the project directory for which to create the bootstrap file.", "string", true));
         parameters.push(paramBuilder.build("name", "The name of the bootstrap file to create.", "string", true));
         parameters.push(paramBuilder.build("path", "Represents the directory name, whithin the project, where to create the bootstrap file.", "string", true));
         parameters.push(paramBuilder.build("compile", "Indicate whether to compile the generated TypeScript file (true), or not (false).", "boolean"));
-        let descriptor = commBuilder.build("$glasscat create-bootstrap-file", "Creates a new bootstrap file for a GlassCat EJP.", parameters);
+        const descriptor = commBuilder.build("$glasscat create-bootstrap-file", "Creates a new bootstrap file for a GlassCat EJP.", parameters);
         return descriptor;
     }
 }
