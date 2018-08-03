@@ -1,5 +1,23 @@
 # JEC GlassCat Commands Project: Update Release Notes
 
+<a name="jec-glasscat-commands-1.0.6"></a>
+## **1.0.6** (2018-08-03)
+
+### Bug Fixes
+
+### Features
+
+- Updating all dependencies
+
+<a name="jec-glasscat-commands-1.0.5"></a>
+## **1.0.5** (2018-07-25)
+
+### Bug Fixes
+
+### Features
+
+- Dependencies upgrade
+
 <a name="jec-glasscat-commands-1.0.4"></a>
 ## **1.0.4** (2017-12-26)
 
