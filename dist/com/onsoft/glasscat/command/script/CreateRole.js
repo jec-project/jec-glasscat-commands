@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const jec_glasscat_cli_1 = require("jec-glasscat-cli");
 const fs = require("fs");
 const mkpath = require("mkpath");
 const jec_commons_1 = require("jec-commons");
 const jec_glasscat_core_1 = require("jec-glasscat-core");
-class CreateRole extends jec_glasscat_cli_1.AbstractScriptCommand {
+const AbstractScriptCommand_1 = require("../core/AbstractScriptCommand");
+const CommandDescriptorBuilder_1 = require("../util/CommandDescriptorBuilder");
+const ParameterDescriptorBuilder_1 = require("../util/ParameterDescriptorBuilder");
+class CreateRole extends AbstractScriptCommand_1.AbstractScriptCommand {
     constructor() {
         super();
     }
@@ -47,16 +49,19 @@ export class ${className} extends BasicSecurityRole {
         templatePaths =
             solver.resolve(name, jec_commons_1.JecStringsEnum.TS_EXTENSION, project, path);
         mkpath(templatePaths.directoryPath, (err) => {
-            if (err)
-                callback(err);
+            if (err) {
+                callback(null, err);
+            }
             else {
-                fs.writeFile(templatePaths.filePath, this.createTemplate(name, role, templatePaths.relativePathPattern), callback);
+                fs.writeFile(templatePaths.filePath, this.createTemplate(name, role, templatePaths.relativePathPattern), (err) => {
+                    callback(null, err);
+                });
             }
         });
     }
     getHelp(argv) {
-        const commBuilder = new jec_glasscat_cli_1.CommandDescriptorBuilder();
-        const paramBuilder = new jec_glasscat_cli_1.ParameterDescriptorBuilder();
+        const commBuilder = new CommandDescriptorBuilder_1.CommandDescriptorBuilder();
+        const paramBuilder = new ParameterDescriptorBuilder_1.ParameterDescriptorBuilder();
         const parameters = new Array();
         parameters.push(paramBuilder.build("projectPath", "Represents the project directory for which to create the security role.", "string", true));
         parameters.push(paramBuilder.build("name", "The name of the security role to create.", "string", true));

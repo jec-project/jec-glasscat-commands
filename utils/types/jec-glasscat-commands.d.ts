@@ -7,6 +7,6 @@
 
 declare module "jec-glasscat-commands" {
 
-import {ScriptCommand, AbstractScriptCommand, CommandDescriptor} from "jec-glasscat-cli";
+import { Logger } from "jec-commons";
 
 /*PLACEHOLDER*/}

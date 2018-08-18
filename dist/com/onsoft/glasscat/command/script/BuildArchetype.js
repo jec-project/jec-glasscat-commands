@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const jec_glasscat_cli_1 = require("jec-glasscat-cli");
 const jec_wildcat_1 = require("jec-wildcat");
-class BuildArchetype extends jec_glasscat_cli_1.AbstractScriptCommand {
+const AbstractScriptCommand_1 = require("../core/AbstractScriptCommand");
+const CommandDescriptorBuilder_1 = require("../util/CommandDescriptorBuilder");
+const ParameterDescriptorBuilder_1 = require("../util/ParameterDescriptorBuilder");
+class BuildArchetype extends AbstractScriptCommand_1.AbstractScriptCommand {
     constructor() {
         super();
     }
@@ -27,15 +29,17 @@ class BuildArchetype extends jec_glasscat_cli_1.AbstractScriptCommand {
         try {
             wildcat = this.buildProcessor();
             request = this.buildRequest(argv);
-            wildcat.execute(request, callback);
+            wildcat.execute(request, (err) => {
+                callback(null, err);
+            });
         }
         catch (err) {
-            callback(err);
+            callback(null, err);
         }
     }
     getHelp(argv) {
-        const commBuilder = new jec_glasscat_cli_1.CommandDescriptorBuilder();
-        const paramBuilder = new jec_glasscat_cli_1.ParameterDescriptorBuilder();
+        const commBuilder = new CommandDescriptorBuilder_1.CommandDescriptorBuilder();
+        const paramBuilder = new ParameterDescriptorBuilder_1.ParameterDescriptorBuilder();
         const parameters = new Array();
         parameters.push(paramBuilder.build("gpm", "The reference to the 'GlassCat Project Model' to use for creating the archetype.", "string", true));
         parameters.push(paramBuilder.build("projectName", "The name of the project created from the archetype.", "string", true));

@@ -1,6 +1,6 @@
 {
   "name": "jec-glasscat-commands",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "JEC GlassCat Commands - The command-line user interface for the GlassCat Aplication Server.",
   "main": "dist/com/onsoft/glasscat/jec-glasscat-commands-index",
   "types": "types/jec-glasscat-commands.d.ts",
@@ -30,7 +30,6 @@
   "homepage": "https://github.com/jec-project/jec-glasscat-commands#readme",
   "dependencies": {
     "jec-commons": "^1.2.0",
-    "jec-glasscat-cli": "^1.0.7",
     "jec-glasscat-core": "^0.1.8",
     "jec-wildcat": "^1.0.9",
     "mkpath": "^1.0.0"

@@ -14,13 +14,14 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import {ScriptCommand, AbstractScriptCommand, CommandDescriptorBuilder,
-        CommandDescriptor, ParameterDescriptorBuilder,
-        ParameterDescriptor} from "jec-glasscat-cli";
 import {Wildcat, WildcatBuilder, WildcatRequestBuilder, WildcatRequest,
         WildcatLoggerProxy} from "jec-wildcat";
-import {LoggerManager} from "jec-glasscat-core";
-import {Logger} from "jec-commons";
+import {AbstractScriptCommand} from "../core/AbstractScriptCommand";
+import {ScriptCommand} from "../ScriptCommand";
+import {CommandDescriptor } from "../core/CommandDescriptor";
+import {CommandDescriptorBuilder} from "../util/CommandDescriptorBuilder";
+import {ParameterDescriptor} from "../core/ParameterDescriptor";
+import {ParameterDescriptorBuilder} from "../util/ParameterDescriptorBuilder";
 
 /**
  * The command that allows to build GlassCat projects form Wildcat archetypes.
@@ -79,15 +80,20 @@ export class BuildArchetype extends AbstractScriptCommand
   /**
    * @inheritDoc
    */
-  public execute(argv:any, callback:(err:any)=>void):void {
+  public execute(argv:any, callback:(success?:any, err?:any)=>void):void {
     let wildcat:Wildcat = null;
     let request:WildcatRequest = null;
     try{
       wildcat = this.buildProcessor();
       request = this.buildRequest(argv);
-      wildcat.execute(request, callback);
+      wildcat.execute(
+        request,
+        (err:any)=> {
+          callback(null, err);
+        }
+      );
     } catch(err) {
-      callback(err);
+      callback(null, err);
     }
   }
 

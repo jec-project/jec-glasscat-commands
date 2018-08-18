@@ -1,5 +1,16 @@
 # JEC GlassCat Commands Project: Update Release Notes
 
+<a name="jec-glasscat-commands-1.0.7"></a>
+## **1.0.7** (2018-08-17)
+
+### Bug Fixes
+
+### Features
+
+- Full refactoring of the module
+- Refactoring the JEC GlassCat Commands module to include the abstract API of the old JEC GlassCat CLI module
+- Removing referencies to the old `jec-glasscat-cli` module
+
 <a name="jec-glasscat-commands-1.0.6"></a>
 ## **1.0.6** (2018-08-03)
 

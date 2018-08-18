@@ -14,15 +14,16 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { TestSuite } from "jec-juta";
-import { expect } from "chai";
-import { CreateBootstrapFile } from "../../../../../src/com/onsoft/glasscat/commands/CreateBootstrapFile";
+import {ScriptCommand} from "../../../src/com/onsoft/glasscat/command/ScriptCommand";
+import {AbstractScriptCommand} from "../../../src/com/onsoft/glasscat/command/core/AbstractScriptCommand";
 
-@TestSuite({
-  description: "Test the CreateBootstrapFile class methods",
-  disabled: true
-})
-export class CreateBootstrapFileTest {
+export class InvalidTestCommand extends AbstractScriptCommand implements ScriptCommand {
 
-  //TODO: create test suits
+  constructor() {
+    super();
+  }
+
+  public execute(argv:any, callback:(err:any)=>void):void {
+      callback("error");
+  }
 }

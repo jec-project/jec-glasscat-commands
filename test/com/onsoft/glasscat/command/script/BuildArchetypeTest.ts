@@ -15,14 +15,12 @@
 //   limitations under the License.
 
 import { TestSuite } from "jec-juta";
-import { expect } from "chai";
-import { CreateJslet } from "../../../../../src/com/onsoft/glasscat/commands/CreateJslet";
 
 @TestSuite({
-  description: "Test the CreateJslet class methods",
+  description: "Test the BuildArchetype class methods",
   disabled: true
 })
-export class CreateJsletTest {
+export class BuildArchetypeTest {
 
   //TODO: create test suits
 }

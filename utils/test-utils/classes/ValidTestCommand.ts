@@ -14,15 +14,16 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { TestSuite } from "jec-juta";
-import { expect } from "chai";
-import { CreateRole } from "../../../../../src/com/onsoft/glasscat/commands/CreateRole";
+import {ScriptCommand} from "../../../src/com/onsoft/glasscat/command/ScriptCommand";
+import {AbstractScriptCommand} from "../../../src/com/onsoft/glasscat/command/core/AbstractScriptCommand";
 
-@TestSuite({
-  description: "Test the CreateRole class methods",
-  disabled: true
-})
-export class CreateRoleTest {
+export class ValidTestCommand extends AbstractScriptCommand implements ScriptCommand {
 
-  //TODO: create test suits
+  constructor() {
+    super();
+  }
+
+  public execute(argv:any, callback:(err:any)=>void):void {
+      callback(null);
+  }
 }

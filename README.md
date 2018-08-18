@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/jec-glasscat-commands.svg)](https://www.npmjs.com/package/jec-glasscat-commands)
 [![Apache 2.0](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
-The GlassCat Commands Project contains the default commands used by the GlassCat Command Line Interface to manage utilities.
+The GlassCat Commands Project contains the default commands used by the GlassCat Server Console and JEC-CLI to manage utilities.
 
 [![][jec-logo]][jec-url]
 
@@ -48,7 +48,7 @@ The documentation generator is [TypeDoc](http://typedoc.org/)
 
 ## Update Release Notes
 
-**Current stable release:** [1.0.6](CHANGELOG.md#jec-glasscat-commands-1.0.6)
+**Current stable release:** [1.0.7](CHANGELOG.md#jec-glasscat-commands-1.0.7)
  
 For a complete listing of release notes for all JEC GlassCat Commands update releases, see the [CHANGELOG](CHANGELOG.md) file. 
 

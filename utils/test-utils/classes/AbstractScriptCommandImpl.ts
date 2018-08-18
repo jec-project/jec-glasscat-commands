@@ -14,15 +14,17 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import { TestSuite } from "jec-juta";
-import { expect } from "chai";
-import { BuildArchetype } from "../../../../../src/com/onsoft/glasscat/commands/BuildArchetype";
+import {ScriptCommand} from "../../../src/com/onsoft/glasscat/command/ScriptCommand";
+import {AbstractScriptCommand} from "../../../src/com/onsoft/glasscat/command/core/AbstractScriptCommand";
+import {Logger} from "jec-commons";
 
-@TestSuite({
-  description: "Test the BuildArchetype class methods",
-  disabled: true
-})
-export class BuildArchetypeTest {
+export class AbstractScriptCommandImpl extends AbstractScriptCommand implements ScriptCommand {
 
-  //TODO: create test suits
+  constructor() {
+    super();
+  }
+
+  public getLogger():Logger {
+    return this.__logger;
+  }
 }

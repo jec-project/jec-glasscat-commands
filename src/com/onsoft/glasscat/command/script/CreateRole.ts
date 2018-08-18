@@ -14,30 +14,32 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import {ScriptCommand, AbstractScriptCommand, CommandDescriptorBuilder, 
-        CommandDescriptor, ParameterDescriptorBuilder,
-        ParameterDescriptor} from "jec-glasscat-cli";
 import * as fs from "fs";
-import * as path from "path";
 import * as mkpath from "mkpath";
-import {TemplatePathsSolver, TemplatePaths} from "jec-glasscat-core";
 import {JecStringsEnum, UrlStringsEnum} from "jec-commons";
+import {TemplatePaths, TemplatePathsSolver} from "jec-glasscat-core";
+import {AbstractScriptCommand} from "../core/AbstractScriptCommand";
+import {ScriptCommand} from "../ScriptCommand";
+import {CommandDescriptorBuilder} from "../util/CommandDescriptorBuilder";
+import {ParameterDescriptor} from "../core/ParameterDescriptor";
+import {ParameterDescriptorBuilder} from "../util/ParameterDescriptorBuilder";
+import {CommandDescriptor} from "../core/CommandDescriptor";
 
 /**
- * The command that allows to create a bootstrap file for a GlassCat EJP.
+ * The command that allows to create a <code>BasicSecurityRole</code> concrete
+ * implementation for a GlassCat EJP.
  * 
- * [[include:CreateBootstrapFile.md]]
+ * [[include:CreateRole.md]]
  * 
-*/
-export class CreateBootstrapFile extends AbstractScriptCommand
-                                 implements ScriptCommand {
+ */
+export class CreateRole extends AbstractScriptCommand implements ScriptCommand {
 
   //////////////////////////////////////////////////////////////////////////////
   // Constructor function
   //////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Creates a new <code>CreateBootstrapFile</code> instance.
+   * Creates a new <code>CreateRole</code> instance.
    */
   constructor() {
     super();
@@ -48,52 +50,33 @@ export class CreateBootstrapFile extends AbstractScriptCommand
   //////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Returns the template for the bootstrap file to create.
+   * Returns the template for the <code>BasicSecurityRole</code> class to
+   * create.
    * 
-   * @param {string} className the class name for the bootstrap file to create.
+   * @param {string} className the class name for the 
+   *                           <code>BasicSecurityRole</code> object to create.
    * @param {string} glasscatPath the relative path to the GlassCat sources.
-   * @return {string} the template for the bootstrap file to create.
+   * @return {string} the template for the <code>BasicSecurityRole</code> object
+   *                  to create.
    */
-  private createTemplate(className:string, glasscatPath:string):string {
+  private createTemplate(className:string, role:string,
+                                           glasscatPath:string):string {
     const template:string =
-`import {BootstrapScript, JecContainer} from "jec-commons";
+`import {BasicSecurityRole} from "jec-glasscat-core";
 
 /**
  * ${className} class.
  *
  * @class ${className}
  * @constructor
- * @extends BootstrapScript
+ * @extends BasicSecurityRole
  */
-export class ${className} implements BootstrapScript {
+export class ${className} extends BasicSecurityRole {
 
-  /**
-   * @inheritDoc
-   */
-  public run(container:JecContainer):void {
-    // TODO Auto-generated method stub
+  constructor() {
+    super("${role}");
   }
 }`;
-    return template;
-  }
-
-  /**
-   * Returns the template for the compiled bootstrap file to create.
-   * 
-   * @param {string} className the class name for the bootstrap file to create.
-   * @param {string} glasscatPath the relative path to the GlassCat sources.
-   * @return {string} the template for the compiled bootstrap file to create.
-   */
-  private createCompiledTemplate(className:string, glasscatPath:string):string {
-    const template:string =
-`"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class ${className} {
-    run(container) {
-      // TODO Auto-generated method stub
-    }
-}
-exports.${className} = ${className};`;
     return template;
   }
 
@@ -104,12 +87,11 @@ exports.${className} = ${className};`;
   /**
    * @inheritDoc
    */
-  public execute(argv:any, callback:(err:any)=>void):void {
+  public execute(argv:any, callback:(success?:any, err?:any)=>void):void {
     const project:string = argv.projectPath;
     const name:string = argv.name;
+    const role:string = argv.role;
     const path:string = argv.path;
-    const compile:boolean =
-                          (argv.compile !== null || argv.compile !== undefined);
     let solver:TemplatePathsSolver = null;
     let templatePaths:TemplatePaths = null;
     if(!project || project === UrlStringsEnum.EMPTY_STRING) {
@@ -118,35 +100,28 @@ exports.${className} = ${className};`;
     if(!name || name === UrlStringsEnum.EMPTY_STRING) {
       throw new SyntaxError("name option is required");
     }
+    if(!role || role === UrlStringsEnum.EMPTY_STRING) {
+      throw new SyntaxError("role option is required");
+    }
     solver = new TemplatePathsSolver();
-    templatePaths = 
-                  solver.resolve(name, JecStringsEnum.TS_EXTENSION, project, path);
+    templatePaths =
+               solver.resolve(name, JecStringsEnum.TS_EXTENSION, project, path);
     mkpath(templatePaths.directoryPath, (err:any)=> {
-      if(err) callback(err);
-      else {
+      if(err) {
+        callback(null, err);
+      } else {
         fs.writeFile(
           templatePaths.filePath,
-          this.createTemplate(name, templatePaths.relativePathPattern),
-          ()=> {
-            if(compile) {
-              templatePaths = solver.resolve(
-                name, JecStringsEnum.JS_EXTENSION, project, path
-              );
-              fs.writeFile(
-                templatePaths.filePath,
-                this.createCompiledTemplate(
-                  name, templatePaths.relativePathPattern
-                ),
-                callback
-              );
-            } else callback(null);
+          this.createTemplate(name, role, templatePaths.relativePathPattern),
+          (err:NodeJS.ErrnoException)=> {
+            callback(null, err);
           }
         );
       }
     });
   }
 
-    /**
+  /**
    * @inheritDoc
    */
   public getHelp(argv:any):any {
@@ -157,7 +132,7 @@ exports.${className} = ${className};`;
     parameters.push(
       paramBuilder.build(
         "projectPath",
-        "Represents the project directory for which to create the bootstrap file.",
+        "Represents the project directory for which to create the security role.",
         "string",
         true
       )
@@ -165,7 +140,7 @@ exports.${className} = ${className};`;
     parameters.push(
       paramBuilder.build(
         "name",
-        "The name of the bootstrap file to create.",
+        "The name of the security role to create.",
         "string",
         true
       )
@@ -173,7 +148,7 @@ exports.${className} = ${className};`;
     parameters.push(
       paramBuilder.build(
         "path",
-        "Represents the directory name, whithin the project, where to create the bootstrap file.",
+        "Represents the directory name, whithin the project, where to create the security role.",
         "string",
         true
       )
@@ -186,8 +161,9 @@ exports.${className} = ${className};`;
       )
     );
     const descriptor:CommandDescriptor = commBuilder.build(
-      "$glasscat create-bootstrap-file",
-      "Creates a new bootstrap file for a GlassCat EJP.",
+      "$glasscat create-role",
+      "Creates a new security role class for a GlassCat EJP.",
+
       parameters
     );
     return descriptor;
